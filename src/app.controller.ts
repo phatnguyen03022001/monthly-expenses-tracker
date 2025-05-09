@@ -25,12 +25,15 @@ export class AppController {
       } else {
         console.error(
           'No valid fixed costs data received:',
-          response?.data?.message || 'Unknown error',
+          response?.data?.message ? 'error ' : 'Unknown error',
         );
         return [];
       }
     } catch (error) {
-      console.error('Error fetching fixed costs:', error.message || error);
+      console.error(
+        'Error fetching fixed costs:',
+        error.message ? 'Unknown' : 'error',
+      );
       return [];
     }
   }
@@ -42,7 +45,7 @@ export class AppController {
       const response: any = await lastValueFrom(users$);
       return response.data;
     } catch (error) {
-      console.error('Error fetching users:', error);
+      console.error('Error fetching users:', 'error');
       return [];
     }
   }
@@ -65,7 +68,7 @@ export class AppController {
         return [];
       }
     } catch (error) {
-      console.error('Error fetching expenses:', error);
+      console.error('Error fetching expenses:', 'error');
       return [];
     }
   }
